@@ -1,0 +1,19 @@
+Activities to be completed before the next session:
+
+- Identify at least three services name used for data storage (in trilions) available in the market.
+
+What i know
+- DPAT > Data Profiling and Analytics Kit > Data Source is Brie > Banking Reservoir and Intelligence Engine Lakehouse (Data Source)
+Lakehouse > Warehouse + Data Lake
+
+Structure Data > ETl > Warehouse > BI
+Data Lake > Structure and Unstrucuted data like Audio, Picture, text, etc
+Lakehouse
+
+Enterprise Data Lake - Apache Spark - Analytics use
+Kubernetes > Cluster > Namespace > Deployment Manifest
+- Kibana >
+- Cockpit >
+
+
+- Investigate key parameters influencing churn rate in the retail industry.
