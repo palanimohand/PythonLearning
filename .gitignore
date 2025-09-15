@@ -2,3 +2,4 @@
 /shelf/
 /.idea/
 *.iml
+__pycache__/
