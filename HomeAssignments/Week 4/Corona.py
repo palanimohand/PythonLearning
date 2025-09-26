@@ -4,20 +4,16 @@ import os
 import numpy as np
 import pandas as pd
 
-"""
-path = kagglehub.dataset_download("imdevskp/corona-virus-report")
 
-print("Path to dataset files:", path)
-
-source_dir = path
-dest_dir = r"C:\Users\Palanimohan\Desktop\AI Engineer\Python_Practice\HomeAssignments\Week 4\Dataset"
-
-for filename in os.listdir(source_dir):
-    src_file = os.path.join(source_dir, filename)
-    dst_file = os.path.join(dest_dir, filename)
-    if os.path.isfile(src_file):
-        shutil.copy(src_file, dst_file)
-"""
+# path = kagglehub.dataset_download("imdevskp/corona-virus-report")
+# print("Path to dataset files:", path)
+# source_dir = path
+# dest_dir = r"C:\Users\Palanimohan\Desktop\AI Engineer\Python_Practice\HomeAssignments\Week 4\Dataset"
+# for filename in os.listdir(source_dir):
+#     src_file = os.path.join(source_dir, filename)
+#     dst_file = os.path.join(dest_dir, filename)
+#     if os.path.isfile(src_file):
+#         shutil.copy(src_file, dst_file)
 
 # 1. Summarize Case Counts by Region
 # o Display total confirmed, death, and recovered cases for each region.
