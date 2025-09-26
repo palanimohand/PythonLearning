@@ -16,38 +16,60 @@ import pandas as pd
 #         shutil.copy(src_file, dst_file)
 
 # 1. Summarize Case Counts by Region
-# o Display total confirmed, death, and recovered cases for each region.
+print("====================== 1. Case Counts by Region ======================")
 df = pd.read_csv(r'HomeAssignments\Week 4\Dataset\country_wise_latest.csv',header=0,index_col=0)
+print("Full dataset:")
 print(df)
 print(pd.concat([df['Confirmed'],df['Deaths'],df['Recovered']],axis=1))
+
 # 2. Filter Low Case Records
-# o Exclude entries where confirmed cases are < 10.
+print("====================== 2. Records with Confirmed Cases < 10 ======================")
 print(df[df['Confirmed']<10])
+
 # 3. Identify Region with Highest Confirmed Cases
+print("====================== 3. Region with Highest Confirmed Cases ======================")
 print(df['Confirmed'].idxmax(),df['Confirmed'].max())
+
 # 4. Sort Data by Confirmed Cases
-# o Save sorted dataset into a new CSV file.
+print("====================== 4. Sorted Data by Confirmed Cases ======================")
 print(df['Confirmed'].sort_values().to_csv("Test.CSV",index=True))
+
 # 5. Top 5 Countries by Case Count
+print("Top 5 countries by confirmed cases:")
 print(df['Confirmed'].sort_values(ascending=False).head())
+
 # 6. Region with Lowest Death Count
+print("====================== 6. Region with Lowest Death Count ======================")
 print(df['Deaths'].sort_values().idxmin(), df['Deaths'].sort_values().min())
+
 # 7. India’s Case Summary (as of April 29, 2020)
+print("====================== 7. India’s Case Summary (as of April 29, 2020) ======================")
 print(df.loc['India',:])
+
 # 8. Calculate Mortality Rate by Region
 # o Death-to-confirmed case ratio.
+print("====================== 8. Mortality Rate by Region ======================")
 print(df['Deaths']/df['Confirmed']*100)
+
 # 9. Compare Recovery Rates Across Regions
+print("====================== 9. Recovery Rates by Region ======================")
 print(df['Recovered']/df['Confirmed']*100)
+
 # 12. Identify Regions with Zero Recovered Cases
+print("====================== 12. Regions with Zero Recoveries ======================")
 print(df[df['Recovered']==0]['Recovered'])
+
 # 11. Group Data by Country and Region
+print("====================== 11. Data Grouped by WHO Region ======================")
 ds = pd.DataFrame(df.groupby("WHO Region",group_keys=True))
 print(ds)
+print("Details for each region:")
 for index in range(len(set(df['WHO Region'].unique()))):
     print(ds[1][index])
+
 # 10. Detect Outliers in Case Counts
 #  Use mean ± 2*std deviation.
+print("====================== 10. Outliers in Case Counts ======================")
 lower = df['Deaths'].mean() - (df['Deaths'].std()*2)
 upper = df['Deaths'].mean() + (df['Deaths'].std()*2)
 print(lower,upper)
@@ -68,4 +90,3 @@ lower = df['New cases'].mean() - (df['New cases'].std()*2)
 upper = df['New cases'].mean() + (df['New cases'].std()*2)
 print(lower,upper)
 print(df[(df['New cases']<upper) & (df['New cases']>lower)]['New cases'])
-
