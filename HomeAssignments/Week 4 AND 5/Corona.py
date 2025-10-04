@@ -9,7 +9,7 @@ class covidCases:
     # path = kagglehub.dataset_download("imdevskp/corona-virus-report")
     # print("Path to dataset files:", path)
     # source_dir = path
-    # dest_dir = r"C:\Users\Palanimohan\Desktop\AI Engineer\Python_Practice\HomeAssignments\Week 4\Dataset"
+    # dest_dir = r"C:\Users\Palanimohan\Desktop\AI Engineer\Python_Practice\HomeAssignments\Week 4 AND 5\Dataset"
     # for filename in os.listdir(source_dir):
     #     src_file = os.path.join(source_dir, filename)
     #     dst_file = os.path.join(dest_dir, filename)
@@ -18,7 +18,7 @@ class covidCases:
 
     # 1. Summarize Case Counts by Region
     print("====================== 1. Case Counts by Region ======================")
-    df = pd.read_csv(r'HomeAssignments\Week 4\Dataset\country_wise_latest.csv',header=0,index_col=0)
+    df = pd.read_csv(r'HomeAssignments\Week 4 AND 5\Dataset\country_wise_latest.csv',header=0,index_col=0)
     print("Full dataset:")
     print(df)
     print(pd.concat([df['Confirmed'],df['Deaths'],df['Recovered']],axis=1))
@@ -114,7 +114,7 @@ class CovidVisualization(covidCases):
     pandas_line_plot = pd.DataFrame(covidCases.df['Confirmed'].sort_values(ascending=False).head(10))
     ax = pandas_line_plot.plot(kind="bar",xlabel="Country", ylabel="Confirmed Cases", title="Bar Chart of Top 10 Countries by Confirmed Cases", figsize=(8,6))
     ax.ticklabel_format(style="plain", axis="y")
-    ax.get_figure().savefig("HomeAssignments\Week 4\Plot_Images\Bar_Plot_with_Pandas.jpeg")
+    ax.get_figure().savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Bar_Plot_with_Pandas.jpeg")
     # Legend came automatically and by default x tick values are 90 rotated
 
     # 2. Pie Chart of Global Death Distribution by Region
@@ -123,7 +123,7 @@ class CovidVisualization(covidCases):
     plt.pie(list(covidCases.df.groupby("WHO Region")['Deaths'].sum()), frame=False, autopct='%1.1f%%', startangle=90)
     plt.legend(covidCases.df.groupby("WHO Region")['Deaths'].sum().index, loc='lower left', bbox_to_anchor=(1.0, 0.0), fontsize='small')
     plt.title("Deaths split by WHO Region")
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Pie_Plot.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Pie_Plot.jpeg")
 
     # 3. Line Chart comparing Confirmed and Deaths for Top 5 Countries
     plt.figure(figsize=(10,4))
@@ -142,7 +142,7 @@ class CovidVisualization(covidCases):
                 plt.annotate(f'{yi}', xy=(xi, yi), xytext=(5, 5),
                             textcoords='offset points', fontsize=8,
                             bbox=dict(boxstyle='round,pad=0.2', fc='white', alpha=0.7))
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Line_Plot.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Line_Plot.jpeg")
 
     # 4. Scatter Plot of Confirmed Cases vs Recovered Cases
     plt.figure(figsize=(18,7))
@@ -157,7 +157,7 @@ class CovidVisualization(covidCases):
     plt.xlabel("Country", loc="center")
     plt.ylabel("Case Count")
     plt.title("Scatter Plot of Confirmed Cases vs Recovered Cases")
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Scatter_Plot.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Scatter_Plot.jpeg")
 
     # 5. Histogram of Death Counts across all Regions
     plt.figure(figsize=(10,6))
@@ -166,7 +166,7 @@ class CovidVisualization(covidCases):
     plt.xlabel("Death counts")
     plt.ylabel("No of Countries in the Death count")
     plt.title("Histogram of Death Counts across all Regions")
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Histogram_Plot.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Histogram_Plot.jpeg")
 
     # 6. Stacked Bar Chart of Confirmed, Deaths, and Recovered for 5 Selected Countries
     plt.figure()
@@ -181,7 +181,7 @@ class CovidVisualization(covidCases):
     plt.ylabel("Confirmed / Death / Recovered Cases")
     plt.title("Stacked Bar Chart of First 5 Countries by Confirmed / Death / Recovered Cases")
     plt.xticks([x + 0.25 for x in range(len(covidCases.df['Confirmed'].head().index))],covidCases.df['Confirmed'].head().index)
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Stacked_bar.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Stacked_bar.jpeg")
 
     # 7. Box Plot of Confirmed Cases across Regions
     fig, axes = plt.subplots(1,2, figsize=(16,8))
@@ -194,7 +194,7 @@ class CovidVisualization(covidCases):
     axes[1].set_ylabel("Count of Death Cases")
     axes[1].ticklabel_format(style='plain', axis='y')
     fig.tight_layout()
-    fig.savefig("HomeAssignments\Week 4\Plot_Images\Box_Plot_Sub_Plot.jpeg")
+    fig.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Box_Plot_Sub_Plot.jpeg")
 
     # try with normal plt plot and pd plot
     # plt.figure()
@@ -219,7 +219,7 @@ class CovidVisualization(covidCases):
     plt.title("Trend Line: Confirmed cases - India vs China")
     plt.xlabel("Confirmed Cases Count")
     plt.ylabel("Country Index")
-    plt.savefig("HomeAssignments\Week 4\Plot_Images\Trend_Line.jpeg")
+    plt.savefig("HomeAssignments\Week 4 AND 5\Plot_Images\Trend_Line.jpeg")
     # plt.show()
 
     def find_outliers(data, threshold=3):
@@ -232,7 +232,10 @@ class CovidVisualization(covidCases):
         outliers = data[np.abs(z_score) > threshold]
         return outliers
     
+    new_df = pd.read_csv(r'HomeAssignments\Week 4 AND 5\Dataset\country_wise_latest.csv',header=0)
+    print(new_df)
     print("Confirmed Outliers", find_outliers(np.array(covidCases.df['Confirmed'])))
     print("Recovered Outliers", find_outliers(np.array(covidCases.df['Recovered'])))
     print("Deaths Outliers", find_outliers(np.array(covidCases.df['Deaths'])))
     print(covidCases.df.groupby(["WHO Region"])["Deaths"].sum())
+    print(new_df.groupby(["WHO Region","Country/Region"])["Deaths"].sum())
