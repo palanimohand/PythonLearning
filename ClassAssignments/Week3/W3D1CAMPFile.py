@@ -1,13 +1,13 @@
-with open("report.txt", "w") as f:
+with open(r"ClassAssignments\Week3\W3D1CAMPFile.txt", "w") as f:
     f.write("TestCase1 - Passed\n")
     f.write("TestCase2 - Failed\n")
     f.write("TestCase3 - Passed\n")
 
-with open("report.txt", "a") as f:
+with open(r"ClassAssignments\Week3\W3D1CAMPFile.txt", "a") as f:
     f.write("TestCase4 - Passed\n")
     f.write("TestCase5 - Failed\n")
 
-with open("report.txt", "r") as f:
+with open(r"ClassAssignments\Week3\W3D1CAMPFile.txt", "r") as f:
     content = f.read()
     print(f.name)
     print(f.mode)
