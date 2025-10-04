@@ -220,5 +220,19 @@ class CovidVisualization(covidCases):
     plt.xlabel("Confirmed Cases Count")
     plt.ylabel("Country Index")
     plt.savefig("HomeAssignments\Week 4\Plot_Images\Trend_Line.jpeg")
-    
     # plt.show()
+
+    def find_outliers(data, threshold=3):
+        nu = data.mean()
+        print("mean: ", nu)
+        sigma = data.std()
+        print("stand deviation: ", sigma)
+        z_score = [(x-nu)/sigma for x in data]
+        # print(z_score)
+        outliers = data[np.abs(z_score) > threshold]
+        return outliers
+    
+    print("Confirmed Outliers", find_outliers(np.array(covidCases.df['Confirmed'])))
+    print("Recovered Outliers", find_outliers(np.array(covidCases.df['Recovered'])))
+    print("Deaths Outliers", find_outliers(np.array(covidCases.df['Deaths'])))
+    print(covidCases.df.groupby(["WHO Region"])["Deaths"].sum())
