@@ -1,0 +1,16 @@
+import pandas as pd
+
+sales_data = pd.read_csv("ClassAssignments\Week6\SalesDataset.csv")
+print(sales_data['Total Amount'].quantile(0.25))
+print(sales_data['Total Amount'].quantile(0.50))
+print(sales_data['Total Amount'].median())
+print(sales_data['Total Amount'].quantile(0.75))
+print(sales_data['Total Amount'].var())
+print(sales_data['Quantity'].var())
+print(pd.concat([sales_data['Age'],sales_data['Total Amount']],axis=1).corr())
+print(pd.concat([sales_data['Quantity'],sales_data['Total Amount']],axis=1).corr())
+print(pd.concat([sales_data['Price per Unit'],sales_data['Total Amount']],axis=1).corr())
+print(sales_data['Age'].corr(sales_data['Total Amount']))
+print(sales_data['Quantity'].corr(sales_data['Total Amount']))
+print(sales_data['Price per Unit'].corr(sales_data['Total Amount']))
+print(sales_data[['Age',"Price per Unit"]])
