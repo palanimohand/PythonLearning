@@ -9,7 +9,7 @@ plt.xlabel("Test Status")
 plt.ylabel("Number of Test Cases")
 plt.title("Test Execution Results")
 # plt.xticks([5,10])
-plt.savefig('Test.png')
+plt.savefig(r'ClassAssignments\Week5\matplotlib1.png')
 
 
 
