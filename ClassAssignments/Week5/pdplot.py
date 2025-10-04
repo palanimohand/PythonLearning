@@ -10,6 +10,6 @@ data = {
 }
 
 panda_data = pd.DataFrame(data)
-panda_data.plot(kind="line").figure.savefig("1.JPG")
-panda_data.plot(kind="bar").figure.savefig("2.JPG")
-panda_data.plot(kind="hist").figure.savefig("3.JPG")
+panda_data.plot(kind="line").figure.savefig(r"ClassAssignments\Week5\Plot_Images\1.JPG")
+panda_data.plot(kind="bar").figure.savefig(r"ClassAssignments\Week5\Plot_Images\2.JPG")
+panda_data.plot(kind="hist").figure.savefig(r"ClassAssignments\Week5\Plot_Images\3.JPG")
