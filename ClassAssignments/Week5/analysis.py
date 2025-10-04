@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv("tt.csv")
+data = pd.read_csv(r"ClassAssignments\Week5\analysis.csv")
 
 print(data)
 print(data['Duration'])
