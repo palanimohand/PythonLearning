@@ -95,13 +95,27 @@ class covidCases:
 
 class CovidVisualization(covidCases):
 
+    # code to set the yticker for plain style instead of scientific globally
+    # from matplotlib.ticker import ScalarFormatter
+
+    # for ax in axs.flat:
+    #     ax.yaxis.set_major_formatter(ScalarFormatter())
+    #     ax.ticklabel_format(style='plain', axis='y')   # ensure no offset/sci
+    #     ax.yaxis.get_major_formatter().set_useOffset(False)
+
     # 1. Bar Chart of Top 10 Countries by Confirmed Cases
-    plt.figure(figsize=(12,6))
-    plt.bar(covidCases.df['Confirmed'].sort_values(ascending=False).head(10).index, list(covidCases.df['Confirmed'].sort_values(ascending=False).head(10)))
-    plt.xlabel("Country")
-    plt.ylabel("Confirmed Cases")
-    plt.title("Bar Chart of Top 10 Countries by Confirmed Cases")
-    plt.ticklabel_format(style="plain", axis="y")
+    # plt.figure(figsize=(12,6))
+    # plt.bar(covidCases.df['Confirmed'].sort_values(ascending=False).head(10).index, list(covidCases.df['Confirmed'].sort_values(ascending=False).head(10)))
+    # plt.xlabel("Country")
+    # plt.ylabel("Confirmed Cases")
+    # plt.title("Bar Chart of Top 10 Countries by Confirmed Cases")
+    # plt.ticklabel_format(style="plain", axis="y")
+
+    pandas_line_plot = pd.DataFrame(covidCases.df['Confirmed'].sort_values(ascending=False).head(10))
+    ax = pandas_line_plot.plot(kind="bar",xlabel="Country", ylabel="Confirmed Cases", title="Bar Chart of Top 10 Countries by Confirmed Cases", figsize=(8,6))
+    ax.ticklabel_format(style="plain", axis="y")
+    ax.get_figure().savefig("HomeAssignments\Week 4\Plot_Images\Bar_Plot_with_Pandas.jpeg")
+    # Legend came automatically and by default x tick values are 90 rotated
 
     # 2. Pie Chart of Global Death Distribution by Region
     plt.figure(figsize=(10,6))
@@ -109,24 +123,26 @@ class CovidVisualization(covidCases):
     plt.pie(list(covidCases.df.groupby("WHO Region")['Deaths'].sum()), frame=False, autopct='%1.1f%%', startangle=90)
     plt.legend(covidCases.df.groupby("WHO Region")['Deaths'].sum().index, loc='lower left', bbox_to_anchor=(1.0, 0.0), fontsize='small')
     plt.title("Deaths split by WHO Region")
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Pie_Plot.jpeg")
 
     # 3. Line Chart comparing Confirmed and Deaths for Top 5 Countries
     plt.figure(figsize=(10,4))
-    plt.plot(covidCases.df['Confirmed'].sort_values(ascending=False).head().index,covidCases.df['Confirmed'].sort_values(ascending=False).head(), marker="o", label='Confirmed')
-    plt.plot(covidCases.df['Deaths'].sort_values(ascending=False).head().index,covidCases.df['Deaths'].sort_values(ascending=False).head(),marker="D", label="Deaths")
+    plt.plot(covidCases.df['Confirmed'].nlargest().index,covidCases.df['Confirmed'].nlargest(), marker="o", label='Confirmed')
+    plt.plot(covidCases.df['Deaths'].nlargest().index,covidCases.df['Deaths'].nlargest(),marker="D", label="Deaths")
     plt.ticklabel_format(style='plain', axis='y')
     plt.legend()
     plt.xlabel("Top 5 Countries")
     plt.ylabel("Count of Confirmed/Death caseas")
     plt.title("Line Chart comparing Confirmed and Deaths for Top 5 Countries")
-    for xi, yi in zip(covidCases.df['Confirmed'].sort_values(ascending=False).head().index, covidCases.df['Confirmed'].sort_values(ascending=False).head()):
+    for xi, yi in zip(covidCases.df['Confirmed'].nlargest().index, covidCases.df['Confirmed'].nlargest()):
             plt.annotate(f'{yi}', xy=(xi, yi), xytext=(5, 5),
                         textcoords='offset points', fontsize=8,
                         bbox=dict(boxstyle='round,pad=0.2', fc='white', alpha=0.7))
-    for xi, yi in zip(covidCases.df['Deaths'].sort_values(ascending=False).head().index, covidCases.df['Deaths'].sort_values(ascending=False).head()):
+    for xi, yi in zip(covidCases.df['Deaths'].nlargest().index, covidCases.df['Deaths'].nlargest()):
                 plt.annotate(f'{yi}', xy=(xi, yi), xytext=(5, 5),
                             textcoords='offset points', fontsize=8,
                             bbox=dict(boxstyle='round,pad=0.2', fc='white', alpha=0.7))
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Line_Plot.jpeg")
 
     # 4. Scatter Plot of Confirmed Cases vs Recovered Cases
     plt.figure(figsize=(18,7))
@@ -141,6 +157,7 @@ class CovidVisualization(covidCases):
     plt.xlabel("Country", loc="center")
     plt.ylabel("Case Count")
     plt.title("Scatter Plot of Confirmed Cases vs Recovered Cases")
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Scatter_Plot.jpeg")
 
     # 5. Histogram of Death Counts across all Regions
     plt.figure(figsize=(10,6))
@@ -149,6 +166,7 @@ class CovidVisualization(covidCases):
     plt.xlabel("Death counts")
     plt.ylabel("No of Countries in the Death count")
     plt.title("Histogram of Death Counts across all Regions")
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Histogram_Plot.jpeg")
 
     # 6. Stacked Bar Chart of Confirmed, Deaths, and Recovered for 5 Selected Countries
     plt.figure()
@@ -163,14 +181,30 @@ class CovidVisualization(covidCases):
     plt.ylabel("Confirmed / Death / Recovered Cases")
     plt.title("Stacked Bar Chart of First 5 Countries by Confirmed / Death / Recovered Cases")
     plt.xticks([x + 0.25 for x in range(len(covidCases.df['Confirmed'].head().index))],covidCases.df['Confirmed'].head().index)
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Stacked_bar.jpeg")
 
     # 7. Box Plot of Confirmed Cases across Regions
-    plt.figure()
-    print(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
-    plt.boxplot(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
-    plt.ticklabel_format(style='plain', axis='y')
-    plt.ylabel("Count of Confirmed Cases")
-    plt.title("Box Plot of Confirmed Cases across Regions")
+    fig, axes = plt.subplots(1,2, figsize=(16,8))
+    axes[0].boxplot(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
+    axes[0].set_title("Box Plot of Confirmed Cases across Regions")
+    axes[0].set_ylabel("Count of Confirmed Cases")
+    axes[0].ticklabel_format(style='plain', axis='y')
+    axes[1].boxplot(covidCases.df.groupby('WHO Region')['Deaths'].sum())
+    axes[1].set_title("Box Plot of Death Cases across Regions")
+    axes[1].set_ylabel("Count of Death Cases")
+    axes[1].ticklabel_format(style='plain', axis='y')
+    fig.tight_layout()
+    fig.savefig("HomeAssignments\Week 4\Plot_Images\Box_Plot_Sub_Plot.jpeg")
+
+    # try with normal plt plot and pd plot
+    # plt.figure()
+    # print(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
+    # plt.boxplot(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
+    # plt.ticklabel_format(style='plain', axis='y')
+    # plt.ylabel("Count of Confirmed Cases")
+    # plt.title("Box Plot of Confirmed Cases across Regions")
+    # box_plot_df = pd.DataFrame(covidCases.df.groupby('WHO Region')['Confirmed'].sum())
+    # box_plot_df.plot(kind="box",ylabel="Count of Confirmed Cases", title="Box Plot of Confirmed Cases across Regions").ticklabel_format(style='plain', axis='y')
 
     # 8. Trend Line: Plot Confirmed cases for India vs another chosen country (side by side comparison)
     plt.figure()
@@ -185,5 +219,6 @@ class CovidVisualization(covidCases):
     plt.title("Trend Line: Confirmed cases - India vs China")
     plt.xlabel("Confirmed Cases Count")
     plt.ylabel("Country Index")
+    plt.savefig("HomeAssignments\Week 4\Plot_Images\Trend_Line.jpeg")
     
-    plt.show()
+    # plt.show()
