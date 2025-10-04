@@ -6,9 +6,9 @@ dictionary_of_series = {
     'Duration' : pd.Series([12, 15, 20, 18, 25])
 }
 ds = pd.DataFrame(dictionary_of_series)
-print(pd.DataFrame(dictionary_of_series))
+print(ds)
 print(ds['Status'])
 print(ds[ds['Status']=='Failed'])
-ds.to_csv("Test.csv",index=False)
-dd = pd.read_csv("Test.csv")
+ds.to_csv(r"ClassAssignments\Week4\W4D2DataFrame2.csv",index=False)
+dd = pd.read_csv(r"ClassAssignments\Week4\W4D2DataFrame2.csv")
 print(dd)
