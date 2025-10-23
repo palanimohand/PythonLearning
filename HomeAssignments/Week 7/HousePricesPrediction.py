@@ -37,8 +37,6 @@ print("Slope",slope_m)
 intercept = mean_of_y - (slope_m*mean_of_x)
 print("Intercept", intercept)
 
-
-
 print(type(train_x))
 print(train_x.shape)
 print(train_y.shape)
@@ -72,7 +70,7 @@ plt.figure()
 plt.scatter(test_x, test_y, label="Data Points")
 plt.plot(test_x, y_predict, color="yellow", label="Regression Line")
 plt.legend()
-plt.title("Linear Regression of Square Footage and House Price")
+plt.title("Actual VS Predicted Prices")
 plt.xlabel("Square Footage")
 plt.ylabel("House Price")
 plt.legend()
