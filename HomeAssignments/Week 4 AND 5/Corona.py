@@ -16,6 +16,9 @@ class covidCases:
     #     if os.path.isfile(src_file):
     #         shutil.copy(src_file, dst_file)
 
+    def read_data_from_csv(file_path, header=0, index_col=0):
+        return pd.read_csv(file_path, header=header, index_col=index_col)
+
     # 1. Summarize Case Counts by Region
     print("====================== 1. Case Counts by Region ======================")
     df = pd.read_csv(r'HomeAssignments\Week 4 AND 5\Dataset\country_wise_latest.csv',header=0,index_col=0)
@@ -33,7 +36,7 @@ class covidCases:
 
     # 4. Sort Data by Confirmed Cases
     print("====================== 4. Sorted Data by Confirmed Cases ======================")
-    print(df['Confirmed'].sort_values().to_csv("Test.CSV",index=True))
+    print(df['Confirmed'].sort_values().to_csv(r"HomeAssignments\Week 4 AND 5\ConfirmedCases.csv",index=True))
 
     # 5. Top 5 Countries by Case Count
     print("Top 5 countries by confirmed cases:")
@@ -132,7 +135,7 @@ class CovidVisualization(covidCases):
     plt.ticklabel_format(style='plain', axis='y')
     plt.legend()
     plt.xlabel("Top 5 Countries")
-    plt.ylabel("Count of Confirmed/Death caseas")
+    plt.ylabel("Count of Confirmed/Death cases")
     plt.title("Line Chart comparing Confirmed and Deaths for Top 5 Countries")
     for xi, yi in zip(covidCases.df['Confirmed'].nlargest().index, covidCases.df['Confirmed'].nlargest()):
             plt.annotate(f'{yi}', xy=(xi, yi), xytext=(5, 5),
